@@ -12,5 +12,9 @@
   "repository": "git@github.com:tomasbjerre/pactflow-publish-sh.git",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "keywords": [
+    "pactflow",
+    "pact"
+  ]
 }
