@@ -1,5 +1,5 @@
 {
-  "version": "0.1.3",
+  "version": "0.2.0",
   "name": "pactflow-publish-sh",
   "scripts": {
     "release": "npm run set-version; npm publish && npm run changelog",
