@@ -2,6 +2,16 @@
 
 Changelog of pactflow-publish-sh.
 
+## v0.1.2 (2024-04-28)
+
+### Other changes
+
+**0.1.2**
+
+
+[3890a](https://github.com/tomasbjerre/pactflow-publish-sh/commit/3890a4d13a46cc0) Tomas Bjerre *2024-04-28 06:47:11*
+
+
 ## v0.1.1 (2024-04-28)
 
 ### Other changes
