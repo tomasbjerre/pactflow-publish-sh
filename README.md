@@ -8,22 +8,34 @@ You may want to use the shell script as is, or use it via `npx` and get it from 
 
 ## Example
 
+You may get the version like this:
+
 ```bash
-./pactflow-publish-sh \
- --username dXfltyFMgNOFZAxr8io9wJ37iUpY42M \
- --password O5AIZWxelWbLvqMd8PkAVycBJh2Psyg1 \
- --pactflow-broker-url https://test.pactflow.io/contracts/publish \
- --build-url build_url http://whatever/
- --pact-json-folder example-pact-json/*.json
+current_version=$(npx git-changelog-command-line \
+  --patch-version-pattern "^fix.*" \
+  --print-current-version)
+git_hash=`git rev-parse --short HEAD`
+participant_version_number="$current_version-$git_hash"
 ```
 
-## Example with NPX
+```bash
+./pactflow-publish.sh \
+ --username=dXfltyFMgNOFZAxr8io9wJ37iUpY42M \
+ --password=O5AIZWxelWbLvqMd8PkAVycBJh2Psyg1 \
+ --pactflow-broker-url=https://test.pactflow.io/contracts/publish \
+ --build-url=http://whatever/ \
+ --pact-json-folder=example-pact-json \
+ --participant-version-number=$participant_version_number
+```
+
+Or with `npx` via `npm`:
 
 ```bash
 npx pactflow-publish-sh \
- --username dXfltyFMgNOFZAxr8io9wJ37iUpY42M \
- --password O5AIZWxelWbLvqMd8PkAVycBJh2Psyg1 \
- --pactflow-broker-url https://test.pactflow.io/contracts/publish \
- --build-url build_url http://whatever/
- --pact-json-folder example-pact-json/*.json
+ --username=dXfltyFMgNOFZAxr8io9wJ37iUpY42M \
+ --password=O5AIZWxelWbLvqMd8PkAVycBJh2Psyg1 \
+ --pactflow-broker-url=https://test.pactflow.io/contracts/publish \
+ --build-url=http://whatever/ \
+ --pact-json-folder=example-pact-json \
+ --participant-version-number=$participant_version_number
 ```

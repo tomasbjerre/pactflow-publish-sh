@@ -22,6 +22,9 @@ while [ $# -gt 0 ]; do
     --pact-json-folder=*)
       pact_json_folder="${1#*=}"
       ;;
+    --participant-version-number=*)
+      participant_version_number="${1#*=}"
+      ;;
     *)
       printf "Invalid argument: $1"
       exit 1
@@ -49,25 +52,23 @@ if [[ -z "$pact_json_folder" ]]; then
     echo "Must provide --pact-json-folder" 1>&2
     exit 1
 fi
+if [[ -z "$participant_version_number" ]]; then
+    echo "Must provide --participant-version-number" 1>&2
+    exit 1
+fi
 
-pact_user=dXfltyFMgNOFZAxr8io9wJ37iUpY42M
-pact_password=O5AIZWxelWbLvqMd8PkAVycBJh2Psyg1 # This is not a mistake, these credentials are publicly available
-pactflow_broker_url=https://test.pactflow.io/contracts/publish
-build_url=https://ci/builds/1234
-pact_json_folder="wiremock-pact-example-springboot-app/src/test/resources/pact-json/*.json"
 
 #
 # Report to Pactflow
 #
-for pact_json_file in $pact_json_folder
+pact_json_files=$(ls $pact_json_folder/*.json)
+echo "Found files:"
+echo $pact_json_files
+echo
+for pact_json_file in $pact_json_files
 do
   echo "Processing $pact_json_file file..."
   json=`cat $pact_json_file`
-  current_version=$(npx git-changelog-command-line \
-  --patch-version-pattern "^fix.*" \
-  --print-current-version)
-  git_hash=`git rev-parse --short HEAD`
-  pacticipant_version_number="$current_version-$git_hash"
   consumer_name=`echo $json | jq -r '.consumer.name'`
   provider_name=`echo $json | jq -r '.provider.name'`
   content_base64=`echo $json | base64`
@@ -77,7 +78,7 @@ do
   read -r -d '' publish_content << EndOfMessage
 {
   "pacticipantName": "$consumer_name",
-  "pacticipantVersionNumber": "$pacticipant_version_number",
+  "pacticipantVersionNumber": "$participant_version_number",
   "branch": "$branch",
   "tags": [
     "$branch"
@@ -103,7 +104,7 @@ EndOfMessage
   echo $publish_content > $publish_content_file
 
   curl -v -X POST \
-    -u "$pact_user:$pact_password" \
+    -u "$username:$password" \
     $pactflow_broker_url \
     -H "Content-Type: application/json" \
     --data-binary @$publish_content_file
