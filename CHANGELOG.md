@@ -2,6 +2,20 @@
 
 Changelog of pactflow-publish-sh.
 
+## v0.1.3 (2024-04-28)
+
+### Bug Fixes
+
+-  npm keywords ([a0f5f](https://github.com/tomasbjerre/pactflow-publish-sh/commit/a0f5f7f9bb60449) Tomas Bjerre)  
+
+### Other changes
+
+**0.1.3**
+
+
+[f4534](https://github.com/tomasbjerre/pactflow-publish-sh/commit/f45348f20f91941) Tomas Bjerre *2024-04-28 08:54:58*
+
+
 ## v0.1.2 (2024-04-28)
 
 ### Other changes
