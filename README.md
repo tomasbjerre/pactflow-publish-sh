@@ -6,6 +6,18 @@ This is a shell script that can publish Pact JSON to a [Pactflow broker](https:/
 
 You may want to use the shell script as is, or use it via `npx` and get it from `npm`.
 
+Parameters:
+
+```sh
+--username                   The username, required if no token given
+--password                   The password, required if no token given
+--token                      The token, required if no username/password given
+--pactflow-broker-url        Base URL of Pactflow
+--build-url                  The URL of the build that invoked this script
+--pact-json-folder           Folder containing Pact JSON files
+--participant-version-number The version
+```
+
 ## Example
 
 You may get the version like this:
@@ -43,3 +55,8 @@ npx pactflow-publish-sh \
 ```
 
 You can login to the broker at https://test.pactflow.io/ with username `dXfltyFMgNOFZAxr8io9wJ37iUpY42M` and password `O5AIZWxelWbLvqMd8PkAVycBJh2Psyg1`.
+
+## See also
+
+- [Publish-contracts API](https://github.com/pact-foundation/pact_broker/blob/master/lib/pact_broker/doc/views/index/publish-contracts.markdown)
+- [Authentication](https://docs.pactflow.io/docs/on-premises/authentication/)

@@ -13,6 +13,9 @@ while [ $# -gt 0 ]; do
     --password=*)
       password="${1#*=}"
       ;;
+    --token=*)
+      token="${1#*=}"
+      ;;
     --pactflow-broker-url=*)
       pactflow_broker_url="${1#*=}"
       ;;
@@ -32,13 +35,15 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-if [[ -z "$username" ]]; then
-    echo "Must provide --username" 1>&2
-    exit 1
-fi
-if [[ -z "$password" ]]; then
-    echo "Must provide --password" 1>&2
-    exit 1
+if [[ -z "$token" ]]; then
+  if [[ -z "$username" ]]; then
+      echo "Must provide --username or --token" 1>&2
+      exit 1
+  fi
+  if [[ -z "$password" ]]; then
+      echo "Must provide --password or --token" 1>&2
+      exit 1
+  fi
 fi
 if [[ -z "$pactflow_broker_url" ]]; then
     echo "Must provide --pactflow-broker-url" 1>&2
@@ -56,7 +61,6 @@ if [[ -z "$participant_version_number" ]]; then
     echo "Must provide --participant-version-number" 1>&2
     exit 1
 fi
-
 
 #
 # Report to Pactflow
@@ -103,9 +107,17 @@ EndOfMessage
   publish_content_file=$(mktemp)
   echo $publish_content > $publish_content_file
 
-  curl -v -X POST \
-    -u "$username:$password" \
-    $pactflow_broker_url \
-    -H "Content-Type: application/json" \
-    --data-binary @$publish_content_file
+  if [ -n "$token" ]; then
+    curl -v \
+      -H "Authorization: Bearer $token" \
+      $pactflow_broker_url \
+      -H "Content-Type: application/json" \
+      --data-binary @$publish_content_file
+  else
+    curl -v \
+      -u "$username:$password" \
+      $pactflow_broker_url \
+      -H "Content-Type: application/json" \
+      --data-binary @$publish_content_file
+  fi
 done
