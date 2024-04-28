@@ -1,4 +1,4 @@
-# Wiremock NPM
+# Pactflow Publish SH
 
 [![NPM](https://img.shields.io/npm/v/pactflow-publish-sh.svg?style=flat-square) ](https://www.npmjs.com/package/pactflow-publish-sh)
 
