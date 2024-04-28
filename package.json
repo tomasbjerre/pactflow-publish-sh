@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "name": "pactflow-publish-sh",
+  "scripts": {
+    "release": "npm run set-version; npm publish && npm run changelog",
+    "set-version": "npm version $(npx git-changelog-command-line --print-next-version)",
+    "changelog": "npx git-changelog-command-line -of CHANGELOG.md && git commit -a -m 'chore: changelog' && git push --follow-tags"
+  },
+  "bin": "./pactflow-publish.sh",
+  "license": "Apache 2",
+  "homepage": "https://github.com/tomasbjerre/pactflow-publish-sh",
+  "repository": "git@github.com:tomasbjerre/pactflow-publish-sh.git",
+  "publishConfig": {
+    "access": "public"
+  }
+}
