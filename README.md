@@ -9,9 +9,9 @@ You may want to use the shell script as is, or use it via `npx` and get it from 
 Parameters:
 
 ```sh
---username                   The username, required if no token given
---password                   The password, required if no token given
---token                      The token, required if no username/password given
+--username                   The username
+--password                   The password
+--token                      The token
 --pactflow-broker-url        Base URL of Pactflow
 --build-url                  The URL of the build that invoked this script
 --pact-json-folder           Folder containing Pact JSON files

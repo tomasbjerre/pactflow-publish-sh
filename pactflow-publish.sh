@@ -35,16 +35,6 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-if [[ -z "$token" ]]; then
-  if [[ -z "$username" ]]; then
-      echo "Must provide --username or --token" 1>&2
-      exit 1
-  fi
-  if [[ -z "$password" ]]; then
-      echo "Must provide --password or --token" 1>&2
-      exit 1
-  fi
-fi
 if [[ -z "$pactflow_broker_url" ]]; then
     echo "Must provide --pactflow-broker-url" 1>&2
     exit 1
@@ -113,9 +103,14 @@ EndOfMessage
       $pactflow_broker_url \
       -H "Content-Type: application/json" \
       --data-binary @$publish_content_file
-  else
+  elif [ -n "$username" ]; then
     curl -v \
       -u "$username:$password" \
+      $pactflow_broker_url \
+      -H "Content-Type: application/json" \
+      --data-binary @$publish_content_file
+  else
+    curl -v \
       $pactflow_broker_url \
       -H "Content-Type: application/json" \
       --data-binary @$publish_content_file
