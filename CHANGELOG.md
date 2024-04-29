@@ -2,6 +2,20 @@
 
 Changelog of pactflow-publish-sh.
 
+## v0.2.1 (2024-04-29)
+
+### Bug Fixes
+
+-  credentials not needed ([ffbe7](https://github.com/tomasbjerre/pactflow-publish-sh/commit/ffbe7f0084297b5) Tomas Bjerre)  [#1](https://github.com/tomasbjerre/pactflow-publish-sh/issues/1)  
+
+### Other changes
+
+**0.2.1**
+
+
+[0e023](https://github.com/tomasbjerre/pactflow-publish-sh/commit/0e023d9ecaa63c5) Tomas Bjerre *2024-04-29 15:01:42*
+
+
 ## v0.2.0 (2024-04-28)
 
 ### Features
