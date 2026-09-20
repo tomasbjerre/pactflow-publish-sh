@@ -59,4 +59,4 @@ You can login to the broker at https://test.pactflow.io/ with username `dXfltyFM
 ## See also
 
 - [Publish-contracts API](https://github.com/pact-foundation/pact_broker/blob/master/lib/pact_broker/doc/views/index/publish-contracts.markdown)
-- [Authentication](https://docs.pactflow.io/docs/on-premises/authentication/)
+- [Authentication](https://support.smartbear.com/swagger/contract-testing/docs/en/user-guide/features/authentication.html)
